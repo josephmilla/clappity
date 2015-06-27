@@ -17,6 +17,45 @@ require('http').createServer(function (request, response) {
 
 var express = require('express');
 var app = express();
+
+var ws = require("nodejs-websocket");
+var port = 8000;
+
+// // INSERT TESSEL IP ADDRESS HERE. Always prepend with 'ws://' to indicate websocket
+// var connection = ws.connect('ws://172.28.116.201:' + port, function() {
+//   // When we connect to the server, send some catchy text
+//   connection.sendText("My milkshake brings all the boys to the yard")
+// });
+//
+// // When we get text back
+// connection.on('text', function(text) {
+//   // print it out
+//   console.log("Echoed back from server:", text);
+// })
+
+// Create the websocket server, provide connection callback
+var server = ws.createServer(function (conn) {
+  console.log("New connection");
+
+  // If we get text from the client, and echo it
+  conn.on("text", function (str) {
+    // print it out
+    console.log("Received "+str)
+    // Send it back (but more excited)
+    conn.sendText(str.toUpperCase()+"!!!")
+  });
+
+  // When the client closes the connection, notify us
+  conn.on("close", function (code, reason) {
+      console.log("Connection closed")
+  });
+}).listen(port);
+
+console.log('listening on port', port);
+
+
+
+
 //
 // app.get('/twilio', function(req, res){
 //   console.log(req);
@@ -64,18 +103,3 @@ var app = express();
 //
 //   res.send('Hello, World!'); //replace with your data here
 // });
-
-var ws = require("nodejs-websocket");
-var port = 8000;
-
-// INSERT TESSEL IP ADDRESS HERE. Always prepend with 'ws://' to indicate websocket
-var connection = ws.connect('ws://172.28.116.201:' + port, function() {
-  // When we connect to the server, send some catchy text
-  connection.sendText("My milkshake brings all the boys to the yard")
-});
-
-// When we get text back
-connection.on('text', function(text) {
-  // print it out
-  console.log("Echoed back from server:", text);
-})
