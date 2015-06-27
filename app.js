@@ -1,48 +1,57 @@
-// var http = require('http');
-// http.createServer(function (req, res) {
-//   res.writeHead(200, {'Content-Type': 'text/plain'});
-//   res.end('Hello World\n');
-// }).listen(8080, '104.236.42.167');
-// console.log('Server running at http://104.236.42.167:8080/');
-
+/**
+ * Static Server
+ */
 var static = require('node-static');
-
 var fileServer = new static.Server('./');
-
 require('http').createServer(function (request, response) {
     request.addListener('end', function () {
         fileServer.serve(request, response);
     }).resume();
 }).listen(8080);
 
-var express = require('express');
-var app = express();
-
+/**
+ * Websocket Server
+ */
 var ws = require("nodejs-websocket");
 var port = 8000;
-
-// // INSERT TESSEL IP ADDRESS HERE. Always prepend with 'ws://' to indicate websocket
-// var connection = ws.connect('ws://172.28.116.201:' + port, function() {
-//   // When we connect to the server, send some catchy text
-//   connection.sendText("My milkshake brings all the boys to the yard")
-// });
-//
-// // When we get text back
-// connection.on('text', function(text) {
-//   // print it out
-//   console.log("Echoed back from server:", text);
-// })
-
 // Create the websocket server, provide connection callback
-var server = ws.createServer(function (conn) {
+var server = ws.createServer(function(conn) {
   console.log("New connection");
 
   // If we get text from the client, and echo it
-  conn.on("text", function (str) {
+  conn.on("text", function(str) {
     // print it out
     console.log("Received "+str)
     // Send it back (but more excited)
     conn.sendText(str.toUpperCase()+"!!!")
+  });
+
+  conn.on("hello", function(str) {
+    // print it out
+    console.log("Hello received "+str);
+    // Send it back (but more excited)
+    conn.sendText(str.toUpperCase()+"!!!");
+  });
+
+  conn.on("pizza", function(str) {
+    // print it out
+    console.log("Pizza received "+str);
+    // Send it back (but more excited)
+    conn.sendText(str.toUpperCase()+"!!!");
+  });
+
+  conn.on("sandwich", function(str) {
+    // print it out
+    console.log("Sandwich received "+str);
+    // Send it back (but more excited)
+    conn.sendText(str.toUpperCase()+"!!!");
+  });
+
+  conn.on("burrito", function(str) {
+    // print it out
+    console.log("Burrito received "+str);
+    // Send it back (but more excited)
+    conn.sendText(str.toUpperCase()+"!!!");
   });
 
   // When the client closes the connection, notify us
@@ -54,8 +63,11 @@ var server = ws.createServer(function (conn) {
 console.log('listening on port', port);
 
 
-
-
+var express = require('express');
+var app = express();
+/**
+ * Twilio
+ */
 //
 // app.get('/twilio', function(req, res){
 //   console.log(req);
