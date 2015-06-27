@@ -1,0 +1,28 @@
+{
+  "name": "battlehack",
+  "version": "0.0.0",
+  "homepage": "https://github.com/josephmilla/battlehack",
+  "authors": [
+    "Joseph Milla",
+    "Michael Lancaster"
+  ],
+  "main": "index.html",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "clap"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery-ui": "~1.11.4"
+  }
+}
