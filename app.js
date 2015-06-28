@@ -24,20 +24,24 @@ var server = ws.createServer(function(conn) {
   // If we get text from the client, and echo it
   conn.on("text", function(str) {
     // print it out
-    console.log("Received "+str)
+    console.log("Received " + str)
     // Send it back (but more excited)
     conn.sendText(str.toUpperCase()+"!!!")
 
     if(str == "hello") {
+      console.log("hello "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
       sendBody(str);
     } else if(str == "pizza") {
+      console.log("pizza "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
       sendBody(str);
     } else if(str == "sandwich") {
+      console.log("sandwich "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
       sendBody(str);
     } else if(str == "burrito") {
+      console.log("burrito "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
       sendBody(str);
     }
