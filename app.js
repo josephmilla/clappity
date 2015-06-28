@@ -66,30 +66,30 @@ var port = 8000;
 //   });
 // }).listen(port);
 
-var io = require('socket.io')(80);
-var hello = io
-  .of('/hello')
-  .on('connection', function (socket) {
-    socket.emit('item', { news: 'item' });
+var io = require('socket.io')(port);
+console.log('Listening on port ' + port);
+
+io.on('connection', function(socket){
+  console.log("New connection");
+  
+  socket.on('hello', function(data){
+    console.log('hello ' + data);
   });
 
-var pizza = io
-  .of('/pizza')
-  .on('connection', function (socket) {
-    socket.emit('item', { news: 'item' });
+  socket.on('pizza', function(data){
+    console.log('pizza ' + data);
   });
 
-var sandwich = io
-  .of('/sandwich')
-  .on('connection', function (socket) {
-    socket.emit('item', { news: 'item' });
+  socket.on('sandwich', function(data){
+    console.log('sandwich ' + data);
   });
 
-var burrito = io
-  .of('/burrito')
-  .on('connection', function (socket) {
-    socket.emit('item', { news: 'item' });
+  socket.on('burrito', function(data){
+    console.log('burrito ' + data);
   });
+
+  socket.on('disconnect', function(){});
+});
 
 function sendBody(str) {
   //Send an SMS text message
