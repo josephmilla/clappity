@@ -1,6 +1,7 @@
 var tessel = require('tessel');
 var ws = require("nodejs-websocket");
 
+var host = '10.0.0.11:';
 var port = 8000;
 
 // Ambient setup
@@ -8,8 +9,8 @@ var ambientLib = require('ambient-attx4');
 var ambient = ambientLib.use(tessel.port['A']);
 
 // INSERT TESSEL IP ADDRESS HERE. Always prepend with 'ws://' to indicate websocket
-var connection = ws.connect('ws://172.28.113.51:' + port, function() {
-    console.log('Running websocket');
+var connection = ws.connect('ws://' + host + port, function() {
+    console.log('Connect to websocket on: ' + host + port );
 
     // When we get text back
     // connection.on('keywords', function(text) {
@@ -23,68 +24,51 @@ ambient.on('ready', function() {
   var lastTime = 0;
   var currentTime;
 	
-  ambient.setSoundTrigger(0.1);
+  ambient.setSoundTrigger(0.2);
 	
 
   ambient.on('sound-trigger', function(sound) {
     currentTime = new Date().getTime();
 
-    connection.sendText('clap');
+    console.log('currentTime', currentTime);
+    console.log('lastTime - currentTime >>> ', currentTime - lastTime)
+    console.log('currentTime - 400', currentTime - 400)
+    console.log('claps', claps++);
+
+    // connection.sendText('clap');
 
     // two claps
     // time frame should be 2 seconds
-    if ( currentTime - lastTime < 3000 ) {
-      if ( claps === 2 ) {
-        connection.sendText('pizza');
-        claps = 0;
-      }
-
-      // three claps
-      // time frame should be 3 seconds
-      if ( claps === 3 ) {
-        connection.sendText('burrito');
-        claps = 0;
-      }
-
-      // four claps
-      // time frame should be 4 seconds
-      if ( claps === 4 ) {
-        connection.sendText('sandwich');
-        claps = 0;
-      }  
+    if ( claps === 2 && currentTime - lastTime <= currentTime - 400 ) {
+      connection.sendText('pizza');
+      claps = 0;
     }
 
+    // three claps
+    // time frame should be 3 seconds
+    if ( claps === 3 && currentTime - lastTime > currentTime - 400 && currentTime - lastTime <= currentTime - 500 ) {
+      connection.sendText('burrito');
+      claps = 0;
+    }
+
+    // four claps
+    // time frame should be 4 seconds
+    if ( claps === 4 && currentTime - lastTime > currentTime - 500 && currentTime - lastTime <= currentTime - 600 ) {
+      connection.sendText('sandwich');
+      claps = 0;
+    }  
+
     claps++;
-    lastSound = new Date().getTime();
+
+    if ( claps > 4 ) {
+      claps = 0
+    }
+
+    lastTime = currentTime;
+
+    console.log('lastTime', lastTime);
 	});
 
 
 });
-
-// var lastClap = (new Date()).getTime();
-
-// function detectClap(data){
-//   var t = (new Date()).getTime();
-//   if(t - lastClap < 200) return false; // TWEAK HERE
-//   var zeroCrossings = 0, highAmp = 0;
-//   for(var i = 1; i < data.length; i++){
-//     if(Math.abs(data[i]) > 0.25) highAmp++; // TWEAK HERE
-//     if(data[i] > 0 && data[i-1] < 0 || data[i] < 0 && data[i-1] > 0) zeroCrossings++;
-//   }
-//   if(highAmp > 20 && zeroCrossings > 30){ // TWEAK HERE
-//     //console.log(highAmp+' / '+zeroCrossings);
-//     lastClap = t;
-//     return true;
-//   }
-
-//   return false;
-// }
-
-
-
-// currentSound = 10
-// lastSound = 5
-
-
-// 10 - 5 < 2
 
