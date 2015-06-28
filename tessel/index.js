@@ -1,7 +1,7 @@
 var tessel = require('tessel');
 var ws = require("nodejs-websocket");
 
-var host = '10.0.0.11:';
+var host = '172.28.113.58:';
 var port = 8000;
 
 // Ambient setup
@@ -24,49 +24,58 @@ ambient.on('ready', function() {
   var lastTime = 0;
   var currentTime;
 	
-  ambient.setSoundTrigger(0.2);
-	
+  ambient.setSoundTrigger(0.1);
 
   ambient.on('sound-trigger', function(sound) {
     currentTime = new Date().getTime();
 
-    console.log('currentTime', currentTime);
-    console.log('lastTime - currentTime >>> ', currentTime - lastTime)
-    console.log('currentTime - 400', currentTime - 400)
-    console.log('claps', claps++);
+    console.log('lastTime ' + lastTime + ' - ' + ' currentTime ' + currentTime);
+    console.log('lastTime - currentTime >>> ', currentTime - lastTime);
+    console.log('currentTime - lastTime <= 3000', currentTime - lastTime <= 3000);
+    console.log('claps', claps);
+
+    console.log('   ');
+    console.log('   ');
 
     // connection.sendText('clap');
+    
 
-    // two claps
-    // time frame should be 2 seconds
-    if ( claps === 2 && currentTime - lastTime <= currentTime - 400 ) {
-      connection.sendText('pizza');
-      claps = 0;
+    // if(claps === 0) {
+    //   claps = 1;
+    // } 
+
+    if(currentTime - lastTime <= 3000) {
+      claps++;
+    } else {
+      // determine action based on number of claps
+      if ( claps === 2 ) {
+        connection.sendText('pizza');
+        console.log('  pizza ');
+        claps = 0;
+      }
+
+      // three claps
+      // time frame should be 3 seconds
+      if ( claps === 3 ) {
+        connection.sendText('burrito');
+        console.log('  burrito ');
+        claps = 0;
+      }
+
+      // four claps
+      // time frame should be 4 seconds
+      if ( claps === 4 ) {
+        connection.sendText('sandwich');
+        console.log('  sandwich ');
+        claps = 0;
+      }  
     }
-
-    // three claps
-    // time frame should be 3 seconds
-    if ( claps === 3 && currentTime - lastTime > currentTime - 400 && currentTime - lastTime <= currentTime - 500 ) {
-      connection.sendText('burrito');
-      claps = 0;
-    }
-
-    // four claps
-    // time frame should be 4 seconds
-    if ( claps === 4 && currentTime - lastTime > currentTime - 500 && currentTime - lastTime <= currentTime - 600 ) {
-      connection.sendText('sandwich');
-      claps = 0;
-    }  
-
-    claps++;
 
     if ( claps > 4 ) {
-      claps = 0
-    }
+        claps = 0;
+      }
 
     lastTime = currentTime;
-
-    console.log('lastTime', lastTime);
 	});
 
 
