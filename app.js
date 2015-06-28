@@ -49,6 +49,8 @@ var server = ws.createServer(function(conn) {
   });
 }).listen(port);
 
+console.log("Listening to port " + port);
+
 function sendBody(str) {
   //Send an SMS text message
   client.sendMessage({
