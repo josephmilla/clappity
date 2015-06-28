@@ -31,19 +31,19 @@ var server = ws.createServer(function(conn) {
     if(str == "hello") {
       console.log("hello "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody(str);
+      sendBody(str, 'http://i.giphy.com/9qIQcHFew1dAs.gif');
     } else if(str == "pizza") {
       console.log("pizza "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody(str);
+      sendBody(str, 'http://i.giphy.com/mOTPaLpdCbiDu.gif');
     } else if(str == "sandwich") {
       console.log("sandwich "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody(str);
+      sendBody(str, 'http://i.giphy.com/c6a2kiRrF0Pbq.gif');
     } else if(str == "burrito") {
       console.log("burrito "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody(str);
+      sendBody(str, 'http://i.giphy.com/RLWAcCIoenx9C.gif');
     }
   });
 
@@ -55,12 +55,13 @@ var server = ws.createServer(function(conn) {
 
 console.log("Listening to port " + port);
 
-function sendBody(str) {
+function sendBody(str, url) {
   //Send an SMS text message
   client.sendMessage({
       to: '+18088889170', // Any number Twilio can deliver to
       from: '+16282226227', // A number you bought from Twilio and can use for outbound communication
-      body: str // body of the SMS message
+      body: str, // body of the SMS message
+      mediaUrl: url
   }, function(err, responseData) { //this function is executed when a response is received from Twilio
 
       if (!err) { // "err" is an error received during the request, if any
