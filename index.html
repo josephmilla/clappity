@@ -20,6 +20,15 @@
         <h1>Battlehacks</h1>
         <p>clapcalksdklajslkd</p>
         <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+
+        <script src="bower_components/socket.io/socket.io.js"></script>
+        <script>
+          var socket = io.connect('http://localhost');
+          socket.on('news', function (data) {
+            console.log(data);
+            socket.emit('my other event', { my: 'data' });
+          });
+        </script>
       </div>
     </div>
 
