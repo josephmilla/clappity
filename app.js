@@ -37,15 +37,15 @@ var server = ws.createServer(function(conn) {
     } else if(str == "pizza") {
       console.log("pizza: "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody('Thanks for ordering. Your delicious pizza is on the way!', 'http://i.giphy.com/mOTPaLpdCbiDu.gif');
+      sendBody('Thanks for ordering. Your delicious PIZZA is on the way!', 'http://i.giphy.com/mOTPaLpdCbiDu.gif');
     } else if(str == "sandwich") {
       console.log("sandwich: "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody('Thanks for ordering. Your delicious sandwich is on the way!', 'http://i.giphy.com/c6a2kiRrF0Pbq.gif');
+      sendBody('Thanks for ordering. Your delicious SANDWICH is on the way!', 'http://i.giphy.com/c6a2kiRrF0Pbq.gif');
     } else if(str == "burrito") {
       console.log("burrito: "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody('Thanks for ordering. Your delicious burrito is on the way!', 'http://i.giphy.com/RLWAcCIoenx9C.gif');
+      sendBody('Thanks for ordering. Your delicious BURRITO is on the way!', 'http://i.giphy.com/26BkLTOQWzao2Cz6g.gif');
     }
   });
 
