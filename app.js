@@ -14,82 +14,40 @@ require('http').createServer(function (request, response) {
 /**
  * Websocket Server
  */
+var ws = require("nodejs-websocket");
 var port = 8000;
-// var ws = require("nodejs-websocket");
-// Create the websocket server, provide connection callback
-// var server = ws.createServer(function(conn) {
-//   console.log("New connection");
-//
-//   // If we get text from the client, and echo it
-//   conn.on("text", function(str) {
-//     // print it out
-//     console.log("Received "+str)
-//     // Send it back (but more excited)
-//     conn.sendText(str.toUpperCase()+"!!!")
-//   });
-//
-//   conn.on("hello", function(str) {
-//     // print it out
-//     console.log("Hello received "+str);
-//     // Send it back (but more excited)
-//     conn.sendText(str.toUpperCase()+"!!!");
-//     sendBody(str);
-//   });
-//
-//   conn.on("pizza", function(str) {
-//     // print it out
-//     console.log("Pizza received "+str);
-//     // Send it back (but more excited)
-//     conn.sendText(str.toUpperCase()+"!!!");
-//     sendBody(str);
-//   });
-//
-//   conn.on("sandwich", function(str) {
-//     // print it out
-//     console.log("Sandwich received "+str);
-//     // Send it back (but more excited)
-//     conn.sendText(str.toUpperCase()+"!!!");
-//     sendBody(str);
-//   });
-//
-//   conn.on("burrito", function(str) {
-//     // print it out
-//     console.log("Burrito received "+str);
-//     // Send it back (but more excited)
-//     conn.sendText(str.toUpperCase()+"!!!");
-//     sendBody(str);
-//   });
-//
-//   // When the client closes the connection, notify us
-//   conn.on("close", function (code, reason) {
-//       console.log("Connection closed")
-//   });
-// }).listen(port);
 
-var io = require('socket.io')(port);
-console.log('Listening on port ' + port);
-
-io.on('connection', function(socket){
+//Create the websocket server, provide connection callback
+var server = ws.createServer(function(conn) {
   console.log("New connection");
-  
-  socket.on('hello', function(data){
-    console.log('hello ' + data);
+
+  // If we get text from the client, and echo it
+  conn.on("text", function(str) {
+    // print it out
+    console.log("Received "+str)
+    // Send it back (but more excited)
+    conn.sendText(str.toUpperCase()+"!!!")
+
+    if(str == "hello") {
+      conn.sendText(str.toUpperCase()+"!!!");
+      sendBody(str);
+    } else if(str == "pizza") {
+      conn.sendText(str.toUpperCase()+"!!!");
+      sendBody(str);
+    } else if(str == "sandwich") {
+      conn.sendText(str.toUpperCase()+"!!!");
+      sendBody(str);
+    } else if(str == "burrito") {
+      conn.sendText(str.toUpperCase()+"!!!");
+      sendBody(str);
+    }
   });
 
-  socket.on('pizza', function(data){
-    console.log('pizza ' + data);
+  // When the client closes the connection, notify us
+  conn.on("close", function (code, reason) {
+      console.log("Connection closed")
   });
-
-  socket.on('sandwich', function(data){
-    console.log('sandwich ' + data);
-  });
-
-  socket.on('burrito', function(data){
-    console.log('burrito ' + data);
-  });
-
-  socket.on('disconnect', function(){});
-});
+}).listen(port);
 
 function sendBody(str) {
   //Send an SMS text message
