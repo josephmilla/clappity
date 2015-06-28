@@ -34,40 +34,35 @@ ambient.on('ready', function() {
     console.log('currentTime - lastTime <= 3000', currentTime - lastTime <= 3000);
     console.log('claps', claps);
 
-    console.log('   ');
-    console.log('   ');
-
-    // connection.sendText('clap');
-    
-
-    // if(claps === 0) {
-    //   claps = 1;
-    // } 
-
-    if(currentTime - lastTime <= 3000) {
+    if(currentTime - lastTime <= 2000) {
       claps++;
     } else {
+      console.log('   ');
+      console.log('   ');
+      console.log('clap to order!');
+      console.log('   ');
+      console.log('   ');
       // determine action based on number of claps
       if ( claps === 2 ) {
         connection.sendText('pizza');
-        console.log('  pizza ');
         claps = 0;
+        console.log('  pizza ');
       }
 
       // three claps
       // time frame should be 3 seconds
       if ( claps === 3 ) {
         connection.sendText('burrito');
-        console.log('  burrito ');
         claps = 0;
+        console.log('  burrito ');
       }
 
       // four claps
       // time frame should be 4 seconds
       if ( claps === 4 ) {
         connection.sendText('sandwich');
-        console.log('  sandwich ');
         claps = 0;
+        console.log('  sandwich ');
       }  
     }
 
@@ -76,6 +71,10 @@ ambient.on('ready', function() {
       }
 
     lastTime = currentTime;
+
+      console.log('   ');
+      console.log('   ');
+
 	});
 
 
