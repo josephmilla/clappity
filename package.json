@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/josephmilla/battlehack#readme",
   "dependencies": {
-    "express": "^4.13.0",
     "node-static": "^0.7.6",
     "socket.io": "^1.3.5",
     "twilio": "^2.2.1"
