@@ -20,30 +20,32 @@ var port = 8000;
 //Create the websocket server, provide connection callback
 var server = ws.createServer(function(conn) {
   console.log("New connection");
+   console.log("What? Order it yourself.");
 
   // If we get text from the client, and echo it
   conn.on("text", function(str) {
     // print it out
-    console.log("Received " + str)
+    // console.log("Ahihihi");
+    console.log("Received " + str);
     // Send it back (but more excited)
     conn.sendText(str.toUpperCase()+"!!!")
 
     if(str == "hello") {
-      console.log("hello "  + str);
+      console.log("hello: "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody(str, 'http://i.giphy.com/9qIQcHFew1dAs.gif');
+      sendBody('Oh, hello there!', 'http://i.giphy.com/9qIQcHFew1dAs.gif');
     } else if(str == "pizza") {
-      console.log("pizza "  + str);
+      console.log("pizza: "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody(str, 'http://i.giphy.com/mOTPaLpdCbiDu.gif');
+      sendBody('Thanks for ordering. Your delicious pizza is on the way!', 'http://i.giphy.com/mOTPaLpdCbiDu.gif');
     } else if(str == "sandwich") {
-      console.log("sandwich "  + str);
+      console.log("sandwich: "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody(str, 'http://i.giphy.com/c6a2kiRrF0Pbq.gif');
+      sendBody('Thanks for ordering. Your delicious sandwich is on the way!', 'http://i.giphy.com/c6a2kiRrF0Pbq.gif');
     } else if(str == "burrito") {
-      console.log("burrito "  + str);
+      console.log("burrito: "  + str);
       conn.sendText(str.toUpperCase()+"!!!");
-      sendBody(str, 'http://i.giphy.com/RLWAcCIoenx9C.gif');
+      sendBody('Thanks for ordering. Your delicious burrito is on the way!', 'http://i.giphy.com/RLWAcCIoenx9C.gif');
     }
   });
 
