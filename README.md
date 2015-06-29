@@ -4,5 +4,15 @@ Clappity makes the lives of people easier through the use of an IoT device. It i
 
 Want a pizza? It's just a clap away.
 
+## Features
+- 2x clap for pizza
+
+## Tech Stack
+- Node.js
+- Tessel (Micro-controller)
+- WebSockets
+- Twilio
+
+
 Made with :pizza: from @josephmilla and @weblancaster
 
