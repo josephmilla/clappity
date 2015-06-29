@@ -4,8 +4,12 @@ Clappity makes the lives of people easier through the use of an IoT device. It i
 
 Want a pizza? It's just a clap away.
 
+This project/hack was built during the 24h Battlehack 2015.
+
 ## Features
-- 2x clap for pizza
+- 2x clap for pizza, pause and 1 more clap for confirmation
+- 3x clap for burrito, pause and 1 more clap for confirmation
+- 4x clap for sandiwch, pause and 1 more clap for confirmation
 
 ## Tech Stack
 - Node.js
@@ -13,6 +17,8 @@ Want a pizza? It's just a clap away.
 - WebSockets
 - Twilio
 
-
-Made with :pizza: from @josephmilla and @weblancaster
+## Authors
+Made with :pizza: by
+- [@josephmilla]()
+- [@weblancaster]()
 
