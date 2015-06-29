@@ -19,6 +19,6 @@ This project/hack was built during the 24h Battlehack 2015.
 
 ## Authors
 Made with :pizza: by
-- [@josephmilla]()
-- [@weblancaster]()
+- [@josephmilla](https://github.com/josephmilla)
+- [@weblancaster](https://github.com/weblancaster)
 
